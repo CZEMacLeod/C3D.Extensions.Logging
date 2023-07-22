@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C3D.Extensions.Logging.Xunit", "src\C3D\Extensions\Logging\Xunit\C3D.Extensions.Logging.Xunit.csproj", "{4C218A44-DBA9-47A8-8662-61E2707ECD8D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{B41F4209-6CAC-411E-9801-C28EF3311DC0}"
+	ProjectSection(SolutionItems) = preProject
+		build\Test.snk = build\Test.snk
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CI", "CI", "{3209520E-917B-4264-9816-5C700398E0E6}"
+	ProjectSection(SolutionItems) = preProject
+		build\azure-pipelines.yml = build\azure-pipelines.yml
+		build\ImportCert.ps1 = build\ImportCert.ps1
+		build\RemoveCert.ps1 = build\RemoveCert.ps1
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EC7EEE34-1959-47F7-9A85-F77434B755FF}"
+	ProjectSection(SolutionItems) = preProject
+		src\Directory.Build.Props = src\Directory.Build.Props
+		src\Directory.Build.Targets = src\Directory.Build.Targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{5EEC3AC4-21A3-4A1B-A157-9AA6E0F6CAAA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{CBA67AB4-0D3C-4873-808E-7B28CC901F23}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "C3D", "C3D", "{D3745893-404F-464E-A99C-1465303A0F7E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Extensions", "Extensions", "{22022BDA-1ED0-43C6-B3CC-632D69799228}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{89F08654-9FBB-418C-93A0-C9BA082E95F9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xunit", "Xunit", "{74840659-1377-4364-8CB0-09D50519E7C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C3D.Extensions.Logging.Xunit.Net6", "test\C3D\Extensions\Logging\Xunit\Net6\C3D.Extensions.Logging.Xunit.Net6.csproj", "{1DD05E2C-7167-42A7-8892-3A9A14C0984F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4C218A44-DBA9-47A8-8662-61E2707ECD8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C218A44-DBA9-47A8-8662-61E2707ECD8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C218A44-DBA9-47A8-8662-61E2707ECD8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C218A44-DBA9-47A8-8662-61E2707ECD8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DD05E2C-7167-42A7-8892-3A9A14C0984F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DD05E2C-7167-42A7-8892-3A9A14C0984F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DD05E2C-7167-42A7-8892-3A9A14C0984F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DD05E2C-7167-42A7-8892-3A9A14C0984F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4C218A44-DBA9-47A8-8662-61E2707ECD8D} = {EC7EEE34-1959-47F7-9A85-F77434B755FF}
+		{3209520E-917B-4264-9816-5C700398E0E6} = {B41F4209-6CAC-411E-9801-C28EF3311DC0}
+		{D3745893-404F-464E-A99C-1465303A0F7E} = {CBA67AB4-0D3C-4873-808E-7B28CC901F23}
+		{22022BDA-1ED0-43C6-B3CC-632D69799228} = {D3745893-404F-464E-A99C-1465303A0F7E}
+		{89F08654-9FBB-418C-93A0-C9BA082E95F9} = {22022BDA-1ED0-43C6-B3CC-632D69799228}
+		{74840659-1377-4364-8CB0-09D50519E7C0} = {89F08654-9FBB-418C-93A0-C9BA082E95F9}
+		{1DD05E2C-7167-42A7-8892-3A9A14C0984F} = {74840659-1377-4364-8CB0-09D50519E7C0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7117E719-0BD9-4968-BD3B-207A373B97B1}
+	EndGlobalSection
+EndGlobal
