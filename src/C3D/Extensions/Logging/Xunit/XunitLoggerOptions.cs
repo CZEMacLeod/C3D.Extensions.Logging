@@ -11,28 +11,50 @@ public enum XunitLoggerTimeStamp
 
 public class XunitLoggerOptions
 {
+    public XunitLoggerOptions(Func<DateTimeOffset>? getUtcNow = null)
+    {
+        GetUtcNow = getUtcNow ?? (() => DateTimeOffset.UtcNow);
+        LogStart = GetUtcNow();
+    }
+
     #region "TimeStamp"
-    private Func<string>? getTimeStamp;
+    private Func<string?>? getTimeStamp;
+    private int? prefixLength;
+    private string? timeStampFormat;
 
     public XunitLoggerTimeStamp TimeStamp { get; set; } = XunitLoggerTimeStamp.None;
-    public string TimeStampFormat { get; set; } = "G";
-
-    public DateTimeOffset LogStart { get; set; } = DateTimeOffset.UtcNow;
-
-    public Func<string> GetTimeStamp { get => getTimeStamp ?? DefaultTimeStamp; set => getTimeStamp = value; }
-
-    private string DefaultTimeStamp()
-    {
-        return TimeStamp switch
+    public string TimeStampFormat { 
+        get => timeStampFormat ?? TimeStamp switch
         {
-            XunitLoggerTimeStamp.DateTime => DateTimeOffset.UtcNow.ToString(TimeStampFormat),
-            XunitLoggerTimeStamp.Offset => (DateTimeOffset.UtcNow - LogStart).ToString(TimeStampFormat),
-            _ => string.Empty
+            XunitLoggerTimeStamp.DateTime => "u",
+            XunitLoggerTimeStamp.Offset => "G",
+            _ => ""
         };
-    }
+        set => timeStampFormat = value; }
+    public DateTimeOffset LogStart { get; set; }
+
+    public Func<string?> GetTimeStamp { get => getTimeStamp ?? DefaultTimeStamp; set => getTimeStamp = value; }
+
+    public Func<DateTimeOffset> GetUtcNow { get; set; }
+
+    private string? DefaultTimeStamp() => TimeStamp switch
+    {
+        XunitLoggerTimeStamp.DateTime => GetUtcNow().ToString(TimeStampFormat),
+        XunitLoggerTimeStamp.Offset => (GetUtcNow() - LogStart).ToString(TimeStampFormat),
+        _ => null
+    };
     #endregion
 
-    public int PrefixLength { get; set; } = 30;
+    public int PrefixLength
+    {
+        get => prefixLength ?? TimeStamp switch
+        {
+            XunitLoggerTimeStamp.DateTime => 90,
+            XunitLoggerTimeStamp.Offset => 85,
+            _ => 70
+        };
+        set => prefixLength = value;
+    }
 
     public LogLevel MinLevel { get; set; } = LogLevel.Trace;
 

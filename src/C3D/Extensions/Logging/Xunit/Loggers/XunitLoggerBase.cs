@@ -24,14 +24,29 @@ public abstract class XunitLoggerBase : ILogger
         var messageBuilder = new StringBuilder();
         var options = Options;
 
-        string timeStamp = options.GetTimeStamp();
+        var timeStamp = options.GetTimeStamp();
 
-        var firstLinePrefix = $"{timeStamp} {category} {logLevel}".PadRight(options.PrefixLength - 5);
+        var exceptionLinePrefix = exception?.GetType().FullName ?? string.Empty;
         var lines = formatter(state, exception).Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
-        messageBuilder.Append($"| {firstLinePrefix} | ");
+        messageBuilder.Append("| ");
+        if (timeStamp is not null)
+        {
+            messageBuilder.Append(timeStamp);
+            messageBuilder.Append(" ");
+        }
+        messageBuilder.Append(category);
+        messageBuilder.Append(" ");
+        messageBuilder.Append(logLevel.ToString());
+        var targetLength = Math.Max(options.PrefixLength - 3, exceptionLinePrefix.Length + 2);
+        if (messageBuilder.Length< targetLength)
+        {
+            messageBuilder.Append(new string(' ', targetLength - messageBuilder.Length));
+        }
+        var firstLineLength = messageBuilder.Length - 2;
+        messageBuilder.Append(" | ");
         messageBuilder.AppendLine(lines.FirstOrDefault() ?? string.Empty);
 
-        var additionalLinePrefix = $"| {new string(' ', firstLinePrefix.Length)} | ";
+        var additionalLinePrefix = $"| {new string(' ', firstLineLength)} | ";
         foreach (var line in lines.Skip(1))
         {
             messageBuilder.Append(additionalLinePrefix);
@@ -40,14 +55,13 @@ public abstract class XunitLoggerBase : ILogger
 
         if (exception != null)
         {
-            var exceptionLinePrefix = exception.GetType().FullName ?? string.Empty;
             lines = exception.Message.Split(NewLineChars, StringSplitOptions.RemoveEmptyEntries);
-            messageBuilder.Append($"| {exceptionLinePrefix.PadRight(firstLinePrefix.Length)} | ");
+            messageBuilder.Append($"| {exceptionLinePrefix.PadRight(firstLineLength)} | ");
             messageBuilder.AppendLine(lines.FirstOrDefault() ?? string.Empty);
 
             foreach (var line in lines.Skip(1))
             {
-                messageBuilder.Append($"| {additionalLinePrefix} | ");
+                messageBuilder.Append(additionalLinePrefix);
                 messageBuilder.AppendLine(line);
             }
         }
