@@ -29,7 +29,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <None Include="README.md" />
     <None Include="version.json" />
   </ItemGroup>
 </Project>

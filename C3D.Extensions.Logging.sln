@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C3D.Extensions.Logging.Xunit", "src\C3D\Extensions\Logging\Xunit\C3D.Extensions.Logging.Xunit.csproj", "{4C218A44-DBA9-47A8-8662-61E2707ECD8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "C3D.Extensions.Logging.Xunit", "src\C3D\Extensions\Logging\Xunit\C3D.Extensions.Logging.Xunit.csproj", "{4C218A44-DBA9-47A8-8662-61E2707ECD8D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{B41F4209-6CAC-411E-9801-C28EF3311DC0}"
 	ProjectSection(SolutionItems) = preProject
@@ -24,6 +24,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EC7EEE34-195
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{5EEC3AC4-21A3-4A1B-A157-9AA6E0F6CAAA}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{CBA67AB4-0D3C-4873-808E-7B28CC901F23}"
 EndProject
@@ -35,7 +38,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{89F0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xunit", "Xunit", "{74840659-1377-4364-8CB0-09D50519E7C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C3D.Extensions.Logging.Xunit.Net6", "test\C3D\Extensions\Logging\Xunit\Net6\C3D.Extensions.Logging.Xunit.Net6.csproj", "{1DD05E2C-7167-42A7-8892-3A9A14C0984F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "C3D.Extensions.Logging.Xunit.Net6", "test\C3D\Extensions\Logging\Xunit\Net6\C3D.Extensions.Logging.Xunit.Net6.csproj", "{1DD05E2C-7167-42A7-8892-3A9A14C0984F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -30,7 +30,9 @@
   </PropertyGroup>
 
   <ItemGroup Condition="'$(IsPackable)' == 'true'">
-    <None Include="README.md" Condition="EXISTS('..\README.md')" Pack="true" PackagePath="\" />
+    <None Include="$(MSBuildProjectDirectory)\README.md" Condition="EXISTS('$(MSBuildProjectDirectory)\README.md')" 
+          Pack="true" 
+          PackagePath="\" />
     <None Include="$(PackageLicensePath)"
           Pack="true"
           PackagePath="$(PackageLicenseFile)"
