@@ -31,4 +31,8 @@
   <ItemGroup>
     <None Include="version.json" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Using Remove="System.Net.Http" />
+  </ItemGroup>
 </Project>
