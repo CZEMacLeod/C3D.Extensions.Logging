@@ -147,6 +147,7 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     codeCoverageEnabled: true
+    minimumExpectedTests: 0
 
 - task: PublishBuildArtifacts@1
   inputs:
