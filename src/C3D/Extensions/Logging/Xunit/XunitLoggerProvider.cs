@@ -54,7 +54,7 @@ public sealed class XunitLoggerProvider : ILoggerProvider
             name => output1 is null ? 
                     (output2 is null ? NullLogger.Instance : 
                      new MessageSinkLogger(name, output2, GetOptions)) :
-                    new TextOutputLogger(name, output1, GetOptions));
+                     new TextOutputLogger(name, output1, GetOptions));
 
     private void Dispose(bool disposing)
     {
