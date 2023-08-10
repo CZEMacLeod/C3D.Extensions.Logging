@@ -1,0 +1,42 @@
+<Project>
+  <Target Name="PackIfChanged">
+    <ItemGroup>
+      <_Temporary Remove="@_Temporary)" />
+      <_Temporary Include="$(git_commit_ids)" />
+    </ItemGroup>
+    <Message Importance="high" Text="Git Commit IDs: %(_Temporary.Identity)" />
+    <Message Importance="high" Text="GitProjectDirectory: $(GitProjectDirectory)" />
+    <Message Importance="high" Text="GitTestProjectDirectory: $(GitTestProjectDirectory)" Condition="'$(GitTestProjectDirectory)'!=''" />
+    <PropertyGroup>
+      <_GitCommand>git log --pretty=tformat:"%%H" -n1 .</_GitCommand>
+    </PropertyGroup>
+    <Exec Command="$(_GitCommand)" WorkingDirectory="$(GitProjectDirectory)" ConsoleToMSBuild="true" Condition="'$(ProjectCommitID)'==''">
+      <Output TaskParameter="ConsoleOutput" PropertyName="ProjectCommitID" />
+    </Exec>
+    <Exec Command="$(_GitCommand)" WorkingDirectory="$(GitTestProjectDirectory)" ConsoleToMSBuild="true" Condition="'$(TestProjectCommitID)'=='' AND '$(GitTestProjectDirectory)'!=''">
+      <Output TaskParameter="ConsoleOutput" PropertyName="TestProjectCommitID" />
+    </Exec>
+    <Message Importance="high" Text="ProjectCommitID: $(ProjectCommitID)" />
+    <Message Importance="high" Text="TestProjectCommitID: $(TestProjectCommitID)" Condition="'$(TestProjectCommitID)'!=''" />
+    <Message Importance="high" Text="IsPackable: $(IsPackable)" />
+    <Message Importance="high" Text="IsTestProject: $(IsTestProject)" />
+    <PropertyGroup>
+      <CommitIDFound Condition="'$(ProjectCommitID)'=='%(_Temporary.Identity)'">true</CommitIDFound>
+      <CommitIDFound Condition="'$(TestProjectCommitID)'!='' AND '$(TestProjectCommitID)'=='%(_Temporary.Identity)'">true</CommitIDFound>
+      <CommitIDFound Condition="'$(ProjectToBuild)'=='$(MSBuildProjectName)'">true</CommitIDFound>
+      <CommitIDFound Condition="'$(CommitIDFound)'==''">false</CommitIDFound>
+    </PropertyGroup>
+    <ItemGroup>
+      <_Temporary Remove="@_Temporary)" />
+    </ItemGroup>
+    <Message Importance="high" Text="CommitIDFound: $(CommitIDFound)" />
+    
+    <!-- Pack libraries -->
+    <MSBuild Projects="$(MSBuildProjectFile)" Targets="Pack" Condition="'$(IsPackable)'=='true' AND '$(CommitIDFound)'=='true'" />
+    <!-- Build sample and test projects to ensure they can build correctly -->
+    <MSBuild Projects="$(MSBuildProjectFile)" Targets="Build" Condition="'$(IsPackable)'=='false' AND '$(CommitIDFound)'=='true'" />
+    <!-- Rebuild test projects with project references for code coverage -->
+    <MSBuild Projects="$(MSBuildProjectFile)" Targets="Build" Condition="'$(IsTestProject)'=='true' AND '$(CommitIDFound)'=='true'" />
+    <Message Importance="high" Text="##vso[build.addbuildtag]$(MSBuildProjectName)" Condition="'$(IsPackable)'=='true' AND '$(CommitIDFound)'=='true'" />
+  </Target>
+</Project>
