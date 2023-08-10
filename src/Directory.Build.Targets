@@ -25,8 +25,8 @@
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
     <PackageReadmeFile Condition="EXISTS('$(MSBuildProjectDirectory)\README.md')">README.md</PackageReadmeFile>
     <PackageLicensePath>$(MSBuildThisFileDirectory)..\$(PackageLicenseFile)</PackageLicensePath>
-    <PackageProjectUrl>https://github.com/CZEMacLeod/MSBuild.SDK.SystemWeb</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/CZEMacLeod/MSBuild.SDK.SystemWeb.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/CZEMacLeod/C3D.Extensions.Logging</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/CZEMacLeod/C3D.Extensions.Logging.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
