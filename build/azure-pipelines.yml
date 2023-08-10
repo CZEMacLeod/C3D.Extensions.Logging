@@ -208,12 +208,14 @@ steps:
 
 - script: nuget push -Source GitHub -ConfigFile %NUGET_CONFIG% -SkipDuplicate "%PACKAGES_DIR%\*.nupkg"
   displayName: Push Nuget Packages to $(GITHUB_PACKAGES)
+  condition: and(succeeded(), ne(variables['package_count'],0))
   env:
     PACKAGES_DIR: $(Build.ArtifactStagingDirectory)
     NUGET_CONFIG: $(Build.ArtifactStagingDirectory)\nuget.publish.config
 
 - task: NuGetCommand@2
   displayName: Push Nuget Packages to nuget.org
+  condition: and(succeeded(), ne(variables['package_count'],0))
   inputs:
     command: 'push'
     feedsToUse: 'config'
