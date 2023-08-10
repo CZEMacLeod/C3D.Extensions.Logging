@@ -112,9 +112,11 @@ steps:
       Write-Host "Commit IDs: $git_commit_ids"
       Write-Host ("##vso[task.setvariable variable=git_commit_ids;]$git_commit_ids")
 
-- task: NuGetToolInstaller@0
+- task: NuGetToolInstaller@1
+  displayName: 'Use NuGet >=6.6.1'
   inputs:
-    versionSpec: 5.8.1
+    versionSpec: '>=6.6.1'
+    checkLatest: true
 
 - task: NuGetCommand@2
   inputs:
