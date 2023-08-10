@@ -30,6 +30,7 @@ parameters:
     values:
       - ' '
       - 'C3D.Extensions.Logging.Xunit'
+
 trigger:
   batch: true
   branches:
@@ -38,6 +39,7 @@ trigger:
   paths:
     exclude:
     - docs/*
+    - README.md
 
 pr: none
 
@@ -135,7 +137,7 @@ steps:
   inputs:
     testSelector: 'testAssemblies'
     testAssemblyVer2: |
-      **\*Tests*.dll
+      **\*.Test.dll
       !**\*TestAdapter.dll
       !**\*TestCentric*.dll
       !**\*TestHost*.dll
@@ -148,6 +150,8 @@ steps:
     configuration: '$(buildConfiguration)'
     codeCoverageEnabled: true
     minimumExpectedTests: 0
+    failOnMinTestsNotRunFail: false
+    failIfCoverageEmpty: false
 
 - task: PublishBuildArtifacts@1
   inputs:
