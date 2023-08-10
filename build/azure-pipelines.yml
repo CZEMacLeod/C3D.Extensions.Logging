@@ -71,6 +71,8 @@ steps:
   clean: true
   submodules: true
   persistCredentials: true
+  fetchDepth: 0
+  fetchTags: true
 
 - powershell: 'Write-Host ("##vso[task.setvariable variable=MSBuildEmitSolution;]0")'
   displayName: 'Ensure MSBuildEmitSolution is not set'
