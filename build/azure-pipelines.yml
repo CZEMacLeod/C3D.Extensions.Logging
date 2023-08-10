@@ -26,9 +26,9 @@ parameters:
   - name: project_to_build
     type: string
     displayName: Project To Build
-    default: ''
+    default: ' '
     values:
-      - ''
+      - ' '
       - 'C3D.Extensions.Logging.Xunit'
 trigger:
   batch: true
