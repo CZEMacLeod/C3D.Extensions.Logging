@@ -1,8 +1,8 @@
-﻿using C3D.Core.Xunit.Logging.Loggers;
+﻿using C3D.Extensions.Xunit.Logging.Loggers;
 using Microsoft.Extensions.Logging;
 using System.Text;
 
-namespace C3D.Core.Xunit.Logging.Loggers;
+namespace C3D.Extensions.Xunit.Logging.Loggers;
 
 public abstract class XunitLoggerBase : ILogger
 {

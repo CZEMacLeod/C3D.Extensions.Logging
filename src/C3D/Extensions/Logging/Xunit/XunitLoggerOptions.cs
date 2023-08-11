@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace C3D.Core.Xunit.Logging;
+namespace C3D.Extensions.Xunit.Logging;
 
 public enum XunitLoggerTimeStamp
 {

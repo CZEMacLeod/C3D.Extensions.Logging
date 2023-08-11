@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Xunit.Abstractions;
 
-namespace C3D.Core.Xunit.Logging.Loggers;
+namespace C3D.Extensions.Xunit.Logging.Loggers;
 
 public class TextOutputLogger : XunitLoggerBase
 {

@@ -2,7 +2,7 @@
 using Xunit.Abstractions;
 using Xunit.Sdk;
 
-namespace C3D.Core.Xunit.Logging.Loggers;
+namespace C3D.Extensions.Xunit.Logging.Loggers;
 
 public class MessageSinkLogger : XunitLoggerBase
 {

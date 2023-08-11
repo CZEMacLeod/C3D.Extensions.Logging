@@ -8,10 +8,10 @@
     <PackageOutputPath Condition="'$(PackageOutputPath)'==''">$(MSBuildThisFileDirectory)..\packages\</PackageOutputPath>
     <EnableDefaultNoneItems>false</EnableDefaultNoneItems>
     <NoWarn>$(NoWarn);NU5128;SA0001</NoWarn>
+    <AssemblyTitle>C3D Extensions Logging</AssemblyTitle>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageTag Include="C3D" />
     <PackageTag Include="CZEM" />
     <PackageTag Include="Logging" />
   </ItemGroup>

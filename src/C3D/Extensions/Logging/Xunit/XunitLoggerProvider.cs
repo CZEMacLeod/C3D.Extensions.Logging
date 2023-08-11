@@ -1,4 +1,4 @@
-﻿using C3D.Core.Xunit.Logging.Loggers;
+﻿using C3D.Extensions.Xunit.Logging.Loggers;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
@@ -6,7 +6,7 @@ using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using Xunit.Abstractions;
 
-namespace C3D.Core.Xunit.Logging;
+namespace C3D.Extensions.Xunit.Logging;
 
 [ProviderAlias("Xunit")]
 public sealed class XunitLoggerProvider : ILoggerProvider
