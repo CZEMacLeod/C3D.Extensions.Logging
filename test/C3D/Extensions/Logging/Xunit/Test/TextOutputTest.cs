@@ -1,4 +1,4 @@
-using C3D.Core.Xunit.Logging;
+using C3D.Extensions.Xunit.Logging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
