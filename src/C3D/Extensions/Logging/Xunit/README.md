@@ -44,6 +44,8 @@ logging
 	});
 ```
 
+N.B. This will add the `output` object as a singleton to the `ILoggingBuilder` services.
+
 ### Direct injection
 
 ```c#
@@ -77,3 +79,13 @@ var loggerFactory = LoggerFactory.Create(builder => builder.AddXunit(output));
 The same mechanisms used in tests based on injecting `ITestOutputHelper` into the test class, can be used in fixtures.
 However, in fixtures you inject `IMessageSink`. The same extension methods are available for both interfaces.
 
+### Utilities
+
+As you may want to check the logged output for content in your tests (either for something existing or not existing), there are 2 utility classes provided.
+
+- `LoggingMessageSink` which implements `IMessageSink`
+- `LoggingTestOutputHelper` which implements `ITestOutputHelper`
+
+These both have a `ClearMessages` function (which may be required in a fixture to ensure output from one test does not affect another), and a `Messages` property.
+
+Examples of how to use these can be found in the unit tests at [CZEMacLeod/C3D.Extensions.Logging](https://github.com/CZEMacLeod/C3D.Extensions.Logging/tree/main/test/C3D/Extensions/Logging/Xunit/Test).

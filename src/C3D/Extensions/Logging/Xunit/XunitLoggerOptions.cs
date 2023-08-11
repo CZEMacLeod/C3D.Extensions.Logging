@@ -11,9 +11,11 @@ public enum XunitLoggerTimeStamp
 
 public class XunitLoggerOptions
 {
-    public XunitLoggerOptions(Func<DateTimeOffset>? getUtcNow = null)
+    public XunitLoggerOptions() : this(() => DateTimeOffset.UtcNow) { }
+
+    public XunitLoggerOptions(Func<DateTimeOffset> getUtcNow)
     {
-        GetUtcNow = getUtcNow ?? (() => DateTimeOffset.UtcNow);
+        GetUtcNow = getUtcNow;
         LogStart = GetUtcNow();
     }
 

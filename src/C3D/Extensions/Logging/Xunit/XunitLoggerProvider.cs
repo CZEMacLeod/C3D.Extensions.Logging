@@ -20,7 +20,7 @@ public sealed class XunitLoggerProvider : ILoggerProvider
 
     public XunitLoggerProvider(IMessageSink output, IOptionsMonitor<XunitLoggerOptions> options)
     {
-        output2= output;
+        output2 = output;
         onChange = options.OnChange(SetOptions);
         SetOptions(options.CurrentValue);
     }
@@ -50,9 +50,9 @@ public sealed class XunitLoggerProvider : ILoggerProvider
     internal XunitLoggerOptions GetOptions() => options;
 
     public ILogger CreateLogger(string categoryName) =>
-        _loggers.GetOrAdd(categoryName, 
-            name => output1 is null ? 
-                    (output2 is null ? NullLogger.Instance : 
+        _loggers.GetOrAdd(categoryName,
+            name => output1 is null ?
+                    (output2 is null ? NullLogger.Instance :
                      new MessageSinkLogger(name, output2, GetOptions)) :
                      new TextOutputLogger(name, output1, GetOptions));
 
