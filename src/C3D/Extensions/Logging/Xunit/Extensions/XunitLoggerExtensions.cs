@@ -1,5 +1,5 @@
-﻿using C3D.Core.Xunit.Logging;
-using C3D.Core.Xunit.Logging.Loggers;
+﻿using C3D.Extensions.Xunit.Logging;
+using C3D.Extensions.Xunit.Logging.Loggers;
 using Microsoft.Extensions.Logging;
 
 namespace Xunit.Abstractions;
