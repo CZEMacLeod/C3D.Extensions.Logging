@@ -6,18 +6,6 @@
     <DebugType Condition=" '$(Configuration)' == 'Debug' ">Full</DebugType>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(SignType)' == 'Test'">
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Test.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(SignType)' == 'Real'">
-    <SignAssembly>true</SignAssembly>
-    <DelaySign Condition="'$(IsTestProject)' != 'true'">true</DelaySign>
-    <AssemblyOriginatorKeyFile Condition="'$(IsTestProject)' != 'true'">$(MSBuildThisFileDirectory)..\build\cloud3d-codesign.snk</AssemblyOriginatorKeyFile>
-    <AssemblyOriginatorKeyFile Condition="'$(IsTestProject)' == 'true'">$(MSBuildThisFileDirectory)..\build\Test.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
-
   <PropertyGroup>
     <Authors>CZEMacLeod</Authors>
     <Company>Cloud3D Ltd.</Company>

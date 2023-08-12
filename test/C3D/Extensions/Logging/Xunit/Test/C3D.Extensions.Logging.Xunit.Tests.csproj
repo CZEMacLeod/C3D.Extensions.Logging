@@ -7,7 +7,7 @@
     <LangVersion>10.0</LangVersion>
     <IsTestProject>true</IsTestProject>
 
-    <GitProjectDirectory>$(SolutionDir)\src\C3D\Extensions\Logging\Xunit\</GitProjectDirectory>
+    <PUTDirectory>$(SolutionDir)\src\C3D\Extensions\Logging\Xunit\</PUTDirectory>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(GitProjectDirectory)C3D.Extensions.Logging.Xunit.csproj" />
+    <ProjectReference Include="$(PUTDirectory)C3D.Extensions.Logging.Xunit.csproj" />
   </ItemGroup>
 
 </Project>

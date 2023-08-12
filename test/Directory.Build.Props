@@ -3,6 +3,5 @@
   
   <PropertyGroup>
     <IsPackable>false</IsPackable>
-    <GitTestProjectDirectory>$(MSBuildProjectDirectory)</GitTestProjectDirectory>
   </PropertyGroup>
 </Project>

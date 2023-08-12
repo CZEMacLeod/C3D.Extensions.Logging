@@ -44,7 +44,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Logging", "Logging", "{89F0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Xunit", "Xunit", "{74840659-1377-4364-8CB0-09D50519E7C0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "C3D.Extensions.Logging.Xunit.Test", "test\C3D\Extensions\Logging\Xunit\Test\C3D.Extensions.Logging.Xunit.Test.csproj", "{1DD05E2C-7167-42A7-8892-3A9A14C0984F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "C3D.Extensions.Logging.Xunit.Tests", "test\C3D\Extensions\Logging\Xunit\Test\C3D.Extensions.Logging.Xunit.Tests.csproj", "{1DD05E2C-7167-42A7-8892-3A9A14C0984F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
