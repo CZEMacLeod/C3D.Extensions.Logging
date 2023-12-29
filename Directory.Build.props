@@ -6,6 +6,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Build.CopyOnWrite" Version="1.0.265" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
   </ItemGroup>
 </Project>
