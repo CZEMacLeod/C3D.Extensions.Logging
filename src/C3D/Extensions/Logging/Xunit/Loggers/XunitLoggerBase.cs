@@ -79,21 +79,9 @@ public abstract class XunitLoggerBase : ILogger
         return message;
     }
 
-    #region "Scope"
-#if NET7_0_OR_GREATER
-public virtual IDisposable? BeginScope<TState>(TState state) where TState : notnull => null;
-#else
-    private class NullScope : IDisposable
-    {   
-        public void Dispose()
-        {
-        }
-    }
-    public virtual IDisposable BeginScope<TState>(TState state) => new NullScope();
-#endif
-#endregion
+    public virtual IDisposable? BeginScope<TState>(TState state)
+         where TState : notnull => Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance.BeginScope(state);
 
     public virtual bool IsEnabled(LogLevel logLevel) => logLevel >= options().MinLevel;
     public abstract void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter);
-
 }

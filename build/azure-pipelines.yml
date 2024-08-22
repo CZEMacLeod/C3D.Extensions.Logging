@@ -113,6 +113,20 @@ steps:
     useGlobalJson: true
     installationPath: $(Agent.ToolsDirectory)/dotnet
 
+- task: UseDotNet@2
+  displayName: 'Use .NET Runtime 6.0.x'
+  inputs:
+    packageType: 'runtime'
+    version: "6.0.x"
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
+- task: UseDotNet@2
+  displayName: 'Use .NET Runtime 7.0.x'
+  inputs:
+    packageType: 'runtime'
+    version: "7.0.x"
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+
 # Install the code signing tool
 - task: DotNetCoreCLI@2
   inputs:
