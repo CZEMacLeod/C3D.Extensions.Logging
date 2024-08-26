@@ -19,6 +19,8 @@ public class XunitLoggerOptions
         LogStart = GetUtcNow();
     }
 
+    public XunitLoggerOptions(TimeProvider timeProvider) : this(timeProvider.GetUtcNow) { }
+
     #region "TimeStamp"
     private Func<string?>? getTimeStamp;
     private int? prefixLength;
