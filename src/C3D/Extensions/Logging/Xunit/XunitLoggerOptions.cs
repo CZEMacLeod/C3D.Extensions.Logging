@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using System.Globalization;
 
 namespace C3D.Extensions.Xunit.Logging;
 
@@ -26,6 +27,8 @@ public class XunitLoggerOptions
     private int? prefixLength;
     private string? timeStampFormat;
 
+    public System.Globalization.CultureInfo? Culture { get; set; }
+
     public XunitLoggerTimeStamp TimeStamp { get; set; } = XunitLoggerTimeStamp.None;
     public string TimeStampFormat { 
         get => timeStampFormat ?? TimeStamp switch
@@ -43,8 +46,8 @@ public class XunitLoggerOptions
 
     private string? DefaultTimeStamp() => TimeStamp switch
     {
-        XunitLoggerTimeStamp.DateTime => GetUtcNow().ToString(TimeStampFormat),
-        XunitLoggerTimeStamp.Offset => (GetUtcNow() - LogStart).ToString(TimeStampFormat),
+        XunitLoggerTimeStamp.DateTime => GetUtcNow().ToString(TimeStampFormat, Culture ?? CultureInfo.CurrentCulture),
+        XunitLoggerTimeStamp.Offset => (GetUtcNow() - LogStart).ToString(TimeStampFormat, Culture ?? CultureInfo.CurrentCulture),
         _ => null
     };
     #endregion
