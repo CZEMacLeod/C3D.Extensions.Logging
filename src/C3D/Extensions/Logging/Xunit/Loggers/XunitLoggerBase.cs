@@ -1,5 +1,4 @@
-﻿using C3D.Extensions.Xunit.Logging.Loggers;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using System.Text;
 
 namespace C3D.Extensions.Xunit.Logging.Loggers;
@@ -32,10 +31,10 @@ public abstract class XunitLoggerBase : ILogger
         if (timeStamp is not null)
         {
             messageBuilder.Append(timeStamp);
-            messageBuilder.Append(" ");
+            messageBuilder.Append(' ');
         }
         messageBuilder.Append(category);
-        messageBuilder.Append(" ");
+        messageBuilder.Append(' ');
         messageBuilder.Append(logLevel.ToString());
         var targetLength = Math.Max(options.PrefixLength - 3, exceptionLinePrefix.Length + 2);
         if (messageBuilder.Length< targetLength)

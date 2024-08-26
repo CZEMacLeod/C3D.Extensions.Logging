@@ -12,7 +12,7 @@ public static class XAXunitLoggerExtensions
     public static ILogger<T> CreateLogger<T>(this IMessageSink output, LogLevel minLevel, DateTimeOffset? logStart = null) =>
         output.CreateLogger<T>(XunitLoggerOptions.CreateOptions(minLevel, logStart));
 
-    public static ILogger<T> CreateLogger<T>(this ITestOutputHelper output, Action<XunitLoggerOptions>? configure=null) =>
+    public static ILogger<T> CreateLogger<T>(this ITestOutputHelper output, Action<XunitLoggerOptions>? configure = null) =>
         output.CreateLogger<T>(XunitLoggerOptions.CreateOptions(configure));
 
     public static ILogger<T> CreateLogger<T>(this IMessageSink output, Action<XunitLoggerOptions>? configure = null) =>
