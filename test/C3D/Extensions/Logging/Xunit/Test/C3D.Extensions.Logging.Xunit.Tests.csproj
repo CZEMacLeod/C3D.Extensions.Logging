@@ -8,6 +8,7 @@
     <IsTestProject>true</IsTestProject>
 
     <PUTDirectory>$(SolutionDir)\src\C3D\Extensions\Logging\Xunit\</PUTDirectory>
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
   </PropertyGroup>
 
   <ItemGroup>
