@@ -138,7 +138,7 @@ public partial class TestOutputHelperTests
 
         var messages = wrapper.Messages;
 
-        Assert.Collection(messages, s => s.EndsWith(info));
+        Assert.Single(messages, s => s.EndsWith(info));
     }
 
     [Fact]

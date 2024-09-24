@@ -23,7 +23,7 @@ public partial class LoggingTestFixture
 
     }
 
-    private ILoggingBuilder ConfigureLogger(ILoggingBuilder builder, IConfiguration configuration) => builder
+    private static ILoggingBuilder ConfigureLogger(ILoggingBuilder builder, IConfiguration configuration) => builder
             .ClearProviders()
             .SetMinimumLevel(LogLevel.Debug)
             .AddConfiguration(configuration.GetSection("Logging"))
