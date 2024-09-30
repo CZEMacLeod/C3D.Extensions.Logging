@@ -6,9 +6,11 @@ namespace Xunit.Abstractions;
 
 public static class XAXunitLoggerExtensions
 {
+    [Obsolete("Please use an overload configuring or passing XunitLoggerOptions")]
     public static ILogger<T> CreateLogger<T>(this ITestOutputHelper output, LogLevel minLevel, DateTimeOffset? logStart = null) =>
         output.CreateLogger<T>(XunitLoggerOptions.CreateOptions(minLevel, logStart));
 
+    [Obsolete("Please use an overload configuring or passing XunitLoggerOptions")]
     public static ILogger<T> CreateLogger<T>(this IMessageSink output, LogLevel minLevel, DateTimeOffset? logStart = null) =>
         output.CreateLogger<T>(XunitLoggerOptions.CreateOptions(minLevel, logStart));
 

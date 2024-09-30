@@ -65,6 +65,7 @@ public class XunitLoggerOptions
 
     public LogLevel MinLevel { get; set; } = LogLevel.Trace;
 
+    [Obsolete("Please use the overload for configuring and call ")]
     internal static XunitLoggerOptions CreateOptions(LogLevel? minLevel = null, DateTimeOffset? logStart = null) =>
         CreateOptions(options =>
         {
