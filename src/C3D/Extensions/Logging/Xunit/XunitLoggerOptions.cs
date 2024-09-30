@@ -69,7 +69,10 @@ public class XunitLoggerOptions
         CreateOptions(options =>
         {
             if (minLevel is not null) { options.MinLevel = minLevel.Value; }
-            if (logStart is not null) { options.LogStart = logStart.Value; }
+            if (logStart is not null) { 
+                options.LogStart = logStart.Value; 
+                options.TimeStamp = XunitLoggerTimeStamp.Offset;
+            }
         });
 
     internal static XunitLoggerOptions CreateOptions(Action<XunitLoggerOptions>? configure)
