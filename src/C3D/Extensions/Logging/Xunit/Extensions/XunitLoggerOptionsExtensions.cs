@@ -21,11 +21,14 @@ public static class XunitLoggerOptionsExtensions {
         return options;
     }
 
-    public static XunitLoggerOptions Restart(this XunitLoggerOptions options)
+    public static XunitLoggerOptions WithLogStart(this XunitLoggerOptions options, DateTimeOffset start)
     {
-        options.LogStart = options.GetUtcNow();
+        options.LogStart = start;
         return options;
     }
+
+    public static XunitLoggerOptions Restart(this XunitLoggerOptions options) =>
+        options.WithLogStart(options.GetUtcNow());
 
     public static XunitLoggerOptions UseCulture(this XunitLoggerOptions options, CultureInfo culture)
     {
