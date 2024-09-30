@@ -14,11 +14,8 @@ public class XunitLoggerOptions
 {
     public XunitLoggerOptions() : this(() => DateTimeOffset.UtcNow) { }
 
-    public XunitLoggerOptions(Func<DateTimeOffset> getUtcNow)
-    {
+    public XunitLoggerOptions(Func<DateTimeOffset> getUtcNow) => 
         GetUtcNow = getUtcNow;
-        LogStart = GetUtcNow();
-    }
 
     public XunitLoggerOptions(TimeProvider timeProvider) : this(timeProvider.GetUtcNow) { }
 
@@ -26,10 +23,24 @@ public class XunitLoggerOptions
     private Func<string?>? getTimeStamp;
     private int? prefixLength;
     private string? timeStampFormat;
+    private XunitLoggerTimeStamp? timeStamp;
+    private DateTimeOffset? logStart;
 
     public System.Globalization.CultureInfo? Culture { get; set; }
 
-    public XunitLoggerTimeStamp TimeStamp { get; set; } = XunitLoggerTimeStamp.None;
+    public XunitLoggerTimeStamp TimeStamp
+    {
+        get => timeStamp ??= XunitLoggerTimeStamp.None;
+        set
+        {
+            timeStamp = value;
+            if (timeStamp == XunitLoggerTimeStamp.Offset && logStart is null)
+            {
+                logStart = GetUtcNow();
+            }
+        }
+    }
+
     public string TimeStampFormat { 
         get => timeStampFormat ?? TimeStamp switch
         {
@@ -37,10 +48,23 @@ public class XunitLoggerOptions
             XunitLoggerTimeStamp.Offset => "G",
             _ => ""
         };
-        set => timeStampFormat = value; }
-    public DateTimeOffset LogStart { get; set; }
+        set => timeStampFormat = value;
+    }
 
-    public Func<string?> GetTimeStamp { get => getTimeStamp ?? DefaultTimeStamp; set => getTimeStamp = value; }
+    public DateTimeOffset LogStart
+    {
+        get => logStart ??= GetUtcNow();
+        set
+        {
+            logStart = value;
+            timeStamp ??= XunitLoggerTimeStamp.Offset;
+        }
+    }
+
+    public Func<string?> GetTimeStamp { 
+        get => getTimeStamp ?? DefaultTimeStamp; 
+        set => getTimeStamp = value; 
+    }
 
     public Func<DateTimeOffset> GetUtcNow { get; set; }
 
@@ -65,7 +89,7 @@ public class XunitLoggerOptions
 
     public LogLevel MinLevel { get; set; } = LogLevel.Trace;
 
-    [Obsolete("Please use the overload for configuring and call ")]
+    [Obsolete("Please use the overload for configuring")]
     internal static XunitLoggerOptions CreateOptions(LogLevel? minLevel = null, DateTimeOffset? logStart = null) =>
         CreateOptions(options =>
         {

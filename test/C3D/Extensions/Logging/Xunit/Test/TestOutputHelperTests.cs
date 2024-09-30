@@ -1,11 +1,11 @@
+using C3D.Extensions.Logging.Xunit.Utilities;
 using C3D.Extensions.Xunit.Logging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using C3D.Extensions.Logging.Xunit.Utilities;
+using Microsoft.Extensions.Time.Testing;
 using System.Runtime.CompilerServices;
 using Xunit.Abstractions;
-using Microsoft.Extensions.Time.Testing;
 
 namespace C3D.Extensions.Logging.Xunit.Test;
 
@@ -69,6 +69,121 @@ public partial class TestOutputHelperTests
         log.LogInformation(info);
     }
 
+
+    [Fact]
+    public void CreateLoggerWithConfigure()
+    {
+        WriteFunctionName();
+
+        var utcNow = new DateTimeOffset(2020, 10, 9, 8, 7, 6, TimeSpan.Zero);
+        var tp = new FakeTimeProvider(utcNow);
+        var wrapper = new LoggingTestOutputHelper(output);
+
+        var log = wrapper.CreateLogger<TestOutputHelperTests>(configure =>
+        {
+            configure
+                .UseTimeProvider(tp)
+                .WithTimeStamp(XunitLoggerTimeStamp.Offset)
+                .UseCulture(System.Globalization.CultureInfo.InvariantCulture)
+                .MinLevel = LogLevel.Information;
+        });
+
+        Assert.NotNull(log);
+
+        log.LogInformation(info);
+
+        Assert.True(log.IsEnabled(LogLevel.Information));
+
+        Assert.False(log.IsEnabled(LogLevel.Debug));
+
+        const string formattedString = "| 0:00:00:00.0000000 C3D.Extensions.Logging.Xunit.Test.TestOutputHelperTests Information | Here is some information";
+        var messages = wrapper.Messages;
+        Assert.Single(messages, formattedString);
+    }
+
+    [Fact]
+    public void CreateLoggerWithLevel()
+    {
+        WriteFunctionName();
+
+        var wrapper = new LoggingTestOutputHelper(output);
+
+#pragma warning disable CS0618 // Type or member is obsolete
+        var log = wrapper.CreateLogger<TestOutputHelperTests>(LogLevel.Information);
+#pragma warning restore CS0618 // Type or member is obsolete
+
+        Assert.NotNull(log);
+
+        log.LogInformation(info);
+
+        Assert.True(log.IsEnabled(LogLevel.Information));
+
+        Assert.False(log.IsEnabled(LogLevel.Debug));
+
+        const string formattedString = "| C3D.Extensions.Logging.Xunit.Test.TestOutputHelperTests Information | Here is some information";
+        var messages = wrapper.Messages;
+        Assert.Single(messages, formattedString);
+    }
+
+    [Fact]
+    public void CreateLoggerWithLevelAndStart()
+    {
+        WriteFunctionName();
+
+        var utcNow = new DateTimeOffset(2020, 10, 9, 8, 7, 6, TimeSpan.Zero);
+        var tp = new FakeTimeProvider(utcNow);
+        var wrapper = new LoggingTestOutputHelper(output);
+
+#pragma warning disable CS0618 // Type or member is obsolete
+        // If you provide a start time, it assumes offset format,
+        // but we can't provide a timeprovider here
+        // so it is difficult to mock/test.
+        var log = wrapper.CreateLogger<TestOutputHelperTests>(LogLevel.Information, utcNow);
+#pragma warning restore CS0618 // Type or member is obsolete
+
+        Assert.NotNull(log);
+
+        log.LogInformation(info);
+
+        Assert.True(log.IsEnabled(LogLevel.Information));
+
+        Assert.False(log.IsEnabled(LogLevel.Debug));
+
+        const string formattedString = "C3D.Extensions.Logging.Xunit.Test.TestOutputHelperTests Information | Here is some information";
+        var messages = wrapper.Messages;
+        Assert.Single(messages, m=> m.EndsWith(formattedString));
+    }
+
+
+    [Fact]
+    public void CreateLoggerWithOptions()
+    {
+        WriteFunctionName();
+
+        var utcNow = new DateTimeOffset(2020, 10, 9, 8, 7, 6, TimeSpan.Zero);
+        var tp = new FakeTimeProvider(utcNow);
+        var wrapper = new LoggingTestOutputHelper(output);
+
+        var options = new XunitLoggerOptions()
+            .UseTimeProvider(tp)
+            .WithTimeStamp(XunitLoggerTimeStamp.Offset)
+            .UseCulture(System.Globalization.CultureInfo.InvariantCulture);
+        options.MinLevel = LogLevel.Information;
+        var log = wrapper.CreateLogger<TestOutputHelperTests>(options);
+
+        Assert.NotNull(log);
+
+        log.LogInformation(info);
+
+        Assert.True(log.IsEnabled(LogLevel.Information));
+
+        Assert.False(log.IsEnabled(LogLevel.Debug));
+
+        const string formattedString = "| 0:00:00:00.0000000 C3D.Extensions.Logging.Xunit.Test.TestOutputHelperTests Information | Here is some information";
+        var messages = wrapper.Messages;
+        Assert.Single(messages, formattedString);
+    }
+
     [Fact]
     public void CreateLoggerWithTimestamp()
     {
@@ -79,8 +194,8 @@ public partial class TestOutputHelperTests
         var tp = new FakeTimeProvider(utcNow);
 
         var log = wrapper.CreateLogger<TestOutputHelperTests>(configure => configure
-            .WithTimeStamp(XunitLoggerTimeStamp.DateTime)
             .UseTimeProvider(tp)
+            .WithTimeStamp(XunitLoggerTimeStamp.DateTime)
             .UseCulture(System.Globalization.CultureInfo.InvariantCulture)
             );
 
@@ -103,13 +218,9 @@ public partial class TestOutputHelperTests
         var utcNow = DateTime.UtcNow;
         var tp = new FakeTimeProvider(utcNow);
 
-        // "| -0:00:00:00.0007472 C3D.Extensions.Logging.Xunit.Test.TestOutputHelperTests Information | Here is some information"
-
-
         var log = wrapper.CreateLogger<TestOutputHelperTests>(configure => configure
-            .WithTimeStamp(XunitLoggerTimeStamp.Offset)
             .UseTimeProvider(tp)
-            .Restart()
+            .WithTimeStamp(XunitLoggerTimeStamp.Offset)
             .UseCulture(System.Globalization.CultureInfo.InvariantCulture)
             );
 
